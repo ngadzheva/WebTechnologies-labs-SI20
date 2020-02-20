@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta encoding="utf-8" />
+  <title>HTML Demo</title>
+</head>
+
+<body>
+  <h1>Heading 1</h1>
+  <h3>Heading 3</h3>
+  <h6>Heading 6</h6>
+
+  <p>This is a paragraph</p>
+
+  <div>
+    This is a long content section
+  </div>
+
+  <p>This is a paragraph with <span>SPAN</span></p>
+
+  <h4> Unordered List: </h4>
+  <ul>
+    <li> Coffee </li>
+    <li> Tea </li>
+    <li> Milk </li>
+  </ul>
+  <h4> Ordered List: </h4>
+  <ol>
+    <li> Coffee </li>
+    <li> Tea </li>
+    <li> Milk </li>
+  </ol>
+  <h4> Definition List: </h4>
+  <dl>
+    <dt> Cola </dt>
+    <dt> Coffee </dt>
+    <dd> Both Contain caffeine</dd>
+    <dt> Tea </dt>
+    <dd> Relaxes you</dd>
+    <dt> Milk </dt>
+    <dd> Is important for young kids </dd>
+    <dd> Contains Calcium </dd>
+  </dl>
+
+  <form>
+    <fieldset>
+      <legend> Register </legend>
+      <label> Username <input placeholder="John Smith" type="text" /> </label>
+      <label> Password <input type="password" /> </label>
+      <label for="userEmail"> Email</label>
+      <input id="userEmail" type="email" placeholder="a@a.com" />
+      <input id="userEmail" type="number" placeholder="5" />
+      Gender
+      <label> Male <input type="radio" name="gender" value="M" /> </label>
+      <label> Female <input type="radio" name="gender" value="F" /> </label>
+      Age Group
+      <select>
+        <option value="1"> Kid (0-12) </option>
+        <option value="2"> Teen (13-19) </option>
+        <option value="3"> Adult (20+) </option>
+      </select>
+    </fieldset>
+  </form>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th> Month </th>
+        <th> Savings </th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td> Sum: $180 </td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr>
+        <td> January </td>
+        <td> $100 </td>
+      </tr>
+      <tr>
+        <td> February </td>
+        <td> $80 </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <form>
+    <input list="browsers">
+    <datalist id="browsers">
+      <option value="Internet Explorer">
+      <option value="Firefox">
+      <option value="Chrome">
+      <option value="Opera">
+      <option value="Safari">
+    </datalist>
+  </form>
+</body>
+
+</html>
