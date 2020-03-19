@@ -6,3 +6,6 @@
 - Use HTTP status codes
 - Handle the received response from the server
 - Create new elements with JS
+
+## JavaScript Quick Quiz
+[JS Basics](https://forms.gle/Ajhqg8snHDjYkUYe8)
