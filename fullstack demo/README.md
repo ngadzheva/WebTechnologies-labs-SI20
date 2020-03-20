@@ -9,3 +9,6 @@
 
 ## JavaScript Quick Quiz
 [JS Basics](https://forms.gle/Ajhqg8snHDjYkUYe8)
+
+## Demo Recording
+[Demo](https://drive.google.com/open?id=1tua-PUgrpoLudGG001JjWs7pZvs0e1J6)
