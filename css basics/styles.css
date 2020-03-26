@@ -1,0 +1,99 @@
+body {
+  color: red;
+  background-image: url("https://www.drawingforall.net/wp-content/uploads/2018/01/how-to-draw-chibi-cat-for-kids.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+p {
+  color: black;
+}
+
+#article1 {
+  width: 250px;
+  text-align: justify;
+  position: relative;
+}
+
+#article1 h2 {
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+#article1>h2 {
+  font-weight: bold;
+  font-size: 30px;
+  font-family: Arial sans-serif;
+}
+
+h1, h2, .author {
+  color: purple;
+}
+
+.author {
+  color: green;
+}
+
+article p {
+  color: black;
+  font-weight: bold;
+}
+
+article>p {
+  color: grey;
+}
+
+article+section {
+  width: 150px;
+  border-style: dotted;
+  border-width: 10px;
+  border-color: red;
+  background-color: yellow;
+  margin-left: 30px;
+}
+
+.author.copyright {
+  position: relative;
+  color: blue;
+  float: right;
+  width: 100px;
+}
+
+#article1:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.author {
+  color: red;
+}
+
+li:last-child {
+  color: black;
+}
+
+a:hover {
+  color: orange;
+}
+
+a {
+  color: black;
+  text-decoration: line-through;
+}
+
+a:visited {}
+
+li {
+  display: inline;
+}
+
+main {
+  position: relative;
+}
+
+#article3 {
+  position: absolute;
+  top: 20px;
+}
