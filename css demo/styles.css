@@ -1,4 +1,4 @@
-@import "reset.css";
+@import "cssreset.css";
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
@@ -14,10 +14,10 @@ body {
 
 #header h1 {
   text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 24px;
   color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 form {
@@ -35,8 +35,8 @@ legend {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 30px;
+  border-bottom: 2px solid #6dc4e5;
   padding-bottom: 15px;
-  border-bottom: 2px solid #6DC4E5;
   width: 100%;
 }
 
@@ -44,17 +44,17 @@ input {
   display: block;
   width: 100%;
   margin: 10px 0 20px;
+  height: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  height: 30px;
 }
 
 #submit {
+  background-color: #6dc4e5;
+  border-color: #244861;
   text-transform: uppercase;
-  background-color: #6DC4E5;
   color: #244861;
   font-weight: bold;
-  border: 1px solid #244861;
 }
 
 #submit:hover {
@@ -68,36 +68,46 @@ input {
 }
 
 #student-info header {
-  text-align: center;
-  font-weight: bold;
-  color: #244861;
-  text-transform: uppercase;
-  border-bottom: 1px solid #244861;
-  width: 500px;
-  margin: 15px auto;
+  border-bottom: 2px solid #6dc4e5;
   padding-bottom: 15px;
+  margin-bottom: 20px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-table {
+header h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #244861;
+  text-transform: uppercase;
+}
+
+#marks {
   border-collapse: collapse;
   width: 50%;
   margin: 15px auto;
 }
 
-th, td {
+td, th {
   text-align: left;
-  padding: 8px;
+  padding: 10px;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+  background-color: #6dc4e5;
+}
+
+tr:first-child {
+  background-color: #244861;
+  color: #fff;
 }
 
 tr:hover {
-  background-color: #6DC4E5;
-}
-
-th {
   background-color: #244861;
-  color: white;
 }
