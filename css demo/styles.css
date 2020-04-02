@@ -1,0 +1,103 @@
+@import "reset.css";
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background-color: #e9e6e0;
+}
+
+#header {
+  height: 50px;
+  background-color: #244861;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+#header h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 24px;
+  color: #fff;
+}
+
+form {
+  width: 500px;
+  border: 2px solid #888;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 25px auto;
+  background-color: #fff;
+  color: #244861;
+}
+
+legend {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #6DC4E5;
+  width: 100%;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 30px;
+}
+
+#submit {
+  text-transform: uppercase;
+  background-color: #6DC4E5;
+  color: #244861;
+  font-weight: bold;
+  border: 1px solid #244861;
+}
+
+#submit:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #244861;
+}
+
+#student-info {
+  margin-top: 35px;
+}
+
+#student-info header {
+  text-align: center;
+  font-weight: bold;
+  color: #244861;
+  text-transform: uppercase;
+  border-bottom: 1px solid #244861;
+  width: 500px;
+  margin: 15px auto;
+  padding-bottom: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  margin: 15px auto;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
+tr:hover {
+  background-color: #6DC4E5;
+}
+
+th {
+  background-color: #244861;
+  color: white;
+}
