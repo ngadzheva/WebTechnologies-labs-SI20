@@ -1,0 +1,106 @@
+body {
+    font-family: 'Arial', 'sans-serif';
+}
+
+nav {
+    float: right;
+    font-size: 16px;
+    color: white;
+    margin-top: 15px;
+}
+
+a {
+    border: 1px solid #00C497;
+    background-color: #00C497;
+    border-radius: 15px 10px;
+    margin-right: 15px;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #07E3B0;
+    border-color: #07E3B0;
+}
+
+a:visited {
+    color: white;
+}
+
+#logout {
+    cursor: pointer;
+}
+
+main {
+    clear: both;
+    margin-top: 15px;
+}
+
+fieldset {
+    position: relative;
+    display: block;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    border: 1px solid #00C497;
+    border-radius: 15px;
+}
+
+legend {
+    font-size: 20px;
+    color: rgb(41, 146, 122);
+}
+
+label, input {
+    display: block;
+    font-size: 18px;
+    margin-top: 15px;
+    color: rgb(41, 146, 122);
+}
+
+input {
+    margin-right: auto;
+    margin-left: auto;
+    width: 99%;
+}
+
+#main-header {
+    text-align: center;
+    color: rgb(41, 146, 122);
+    font-size: 90px;
+    margin-top: 20px;
+}
+
+#login {
+    border: 1px solid rgb(41, 146, 122);
+    background-color: rgb(41, 146, 122);
+    color: white;
+}
+
+#login:hover {
+    cursor: pointer;
+    background-color: #07E3B0;
+    border-color: #07E3B0;
+}
+
+#errors {
+    color: red;
+}
+
+#user {
+    font-size: 50px;
+    color: rgb(41, 146, 122);
+    margin-left: 15px;
+}
+
+#remember-me {
+    display: inline;
+    width: 20px;
+}
+
+#remember-me+label {
+    display: inline;
+    font-size: 18px;
+}
