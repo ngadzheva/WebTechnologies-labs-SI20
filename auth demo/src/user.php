@@ -163,16 +163,16 @@
         /**
          * Insert new user to the DB
          */
-        public function createUser($userName, $password, $email) {
+        public function createUser($password, $email) {
             /**
              * Call the Database method updateUserQuery with associative array holding the new data of the user
              */
-            $query = $this->db->insertUserQuery(array("user" => $userName, "password" => $passwordHash, "email" => $email));
+            $query = $this->db->insertUserQuery(array("user" => $this->userName, "password" => $password, "email" => $email));
 
             /**
              * If the query was executed successfully we can initialize the user's data
              */
-            if($qeury["success"]) {
+            if($query["success"]) {
                 $this->password = $password;
                 $this->email = $email;
 
