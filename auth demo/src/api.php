@@ -1,240 +1,177 @@
 <?php
-    require_once "user.php";
-    require_once "tokenUtility.php";
+  require_once "user.php";
+  require_once "tokenUtility.php";
 
-    /**
-     * We use this script to handle user requests
-     */
+  session_start();
 
-    /**
-     * Start a session
-     */
-    session_start();
+  header("Content-type: application/json");
 
-    /**
-     * Set Content-type: application/json header, because we will work with JSON data
-     */
-    header("Content-type: application/json");
+  $requestURL = $_SERVER["REQUEST_URI"];
 
-    /**
-     * Get the requested URI
-     */
-    $requestUri = $_SERVER["REQUEST_URI"];
+  if (preg_match("/registration$/", $requestURL)) {
+    registration();
+  } elseif (preg_match("/login$/", $requestURL)) {
+    login();
+  } elseif (preg_match("/dashboard$/", $requestURL)) {
+    dashboard();
+  } elseif (preg_match("/logout$/", $requestURL)) {
+    logout();
+  } else {
+    echo json_encode(["error" => "Не е намерен такъв URL"]);
+  }
 
-    /**
-     * Check the requested route and exeute appropriate actions
-     */
-    if(preg_match("/login$/", $requestUri)){
-        login();
-    } elseif(preg_match("/registration$/", $requestUri)) {
-        registration();
-    }elseif(preg_match("/dashboard$/", $requestUri)) {
-        dashboard();
-    } elseif(preg_match("/logout$/", $requestUri)) {
-        logout();
+  function registration() {
+    $errors = [];
+    $response = [];
+
+    if ($_POST) {
+      $data = json_decode($_POST["data"], true);
+
+      $userName = testInput($data["userName"]);
+      $password = testInput($data["password"]);
+      $confirmPassword = testInput($data["confirmPassword"]);
+      $email = testInput($data["email"]);
+
+      if (!$userName) {
+        $errors[] = "Въведете потребителско име";
+      }
+
+      if (!$password) {
+        $errors[] = "Въведете парола";
+      }
+
+      if (!$confirmPassword) {
+        $errors[] = "Въведете повторно парола";
+      }
+
+      if ($userName && $password && $confirmPassword) {
+        if ($password != $confirmPassword) {
+          $errors[] = "Двете пароли не съвпадат";
+        } else {
+          $user = new User($userName, $password);
+          $exists = $user->userExists();
+
+          if ($exists["exists"]) {
+            $errors[] = "Потребителското име е заето";
+          } else {
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            $user->createUser($passwordHash, $email);
+          }
+        }
+      }
     } else {
-        echo "Не е намерен такъв URL.";
+      $erros[] = "Грешна заявка";
     }
 
-    /**
-     * Make authorization and authentication of the user on login
-     */
-    function login() {
-        /**
-         * This array will hold the errors we found
-         */
-        $errors = [];
+    if ($errors) {
+      $response = ["success" => false, "data" => $errors];
+    } else {
+      $response = ["success" => true];
+    }
 
-        /**
-         * Check whether a POST request was made
-         * If a POST request was made, we can authorize and authenticate the user
-         */
-        if($_POST) {
-            /**
-             * Decode the received data to associative array
-             */
-            $data = json_decode($_POST["data"], true);
+    echo json_encode($response);
+  }
 
-            /**
-             * Check whether user name and password were inputed
-             */
-            if(!$data["userName"]) {
-                $errors[] = "Моля, въведете потребителско име.";
-            }
+  function login() {
+    $errors = [];
+    $response = [];
 
-            if(!$data["password"]) {
-                $errors[] = "Моля, въведете парола.";
-            }
+    if($_POST) {
+      $data = json_decode($_POST["data"], true);
 
-            /**
-             * If the user name and password were inputed we can validate them
-             */
-            if($data["userName"] && $data["password"]) {
-                $user = new User($data["userName"], $data["password"]);
-                $isValid = $user->isValid();
+      $userName = testInput($data["userName"]);
+      $password = testInput($data["password"]);
+      $remember = $data["remember"];
 
-                /**
-                 * If the inputed user name and password were valid, we can store the to the session
-                 */
-                if($isValid["success"]){
-                    $_SESSION["userName"] = $user->getUsername();
-                    $_SESSION["password"] = $user->getPassword();
+      if (!$userName) {
+        $errors[] = "Въведете потребителско име";
+      }
 
-                    if($data["remember"]) {
-                        $tokenUtility = new TokenUtility();
-                        $token = bin2hex(random_bytes(8));
-                        $expires = time() + 60 * 30 * 24 * 60;
-                        setcookie("token", $token, $expires, "/");
-                        $tokenUtility->createToken($token, $user->getUserId(), $expires);
-                    }
-                } else {
-                    $errors[] = $isValid["error"];
-                }
-            }
+      if (!$password) {
+        $errors[] = "Въведете парола";
+      }
 
-            $response;
+      if ($userName && $password) {
+        $user = new User($userName, $password);
+        $isValid = $user->isValid();
 
-            if($errors) {
-                $response = ["success" => false, "data" => $errors];
-            } else {
-                $response = ["success" => true];
-            }
+        if($isValid["success"]) {
+          $_SESSION["userName"] = $userName;
+          $_SESSION["password"] = $user->getPassword();
 
-            /**
-             * Return response to the user
-             */
-            echo json_encode($response);
+          if ($remember) {
+            $tokenUtility = new TokenUtility();
+            $token = bin2hex(random_bytes(8));
+            $expires = time() + 60 * 30 * 24 * 60;
+            setcookie("token", $token, $expires, "/");
+            $tokenUtility->createToken($token, $user->getUserId(), $expires);
+          }
         } else {
-            echo "Грешка...";
+          $errors[] = $isValid["error"];
         }
+      }
+    } else {
+      $erros[] = "Грешна заявка";
     }
 
-    function registration() {
-         /**
-         * This array will hold the errors we found
-         */
-        $errors = [];
+    if ($errors) {
+      $response = ["success" => false, "data" => $errors];
+    } else {
+      $response = ["success" => true];
+    }
 
-        /**
-         * Check whether a POST request was made
-         * If a POST request was made, we can authorize and authenticate the user
-         */
-        if($_POST) {
-            /**
-             * Decode the received data to associative array
-             */
-            $data = json_decode($_POST["data"], true);
+    echo json_encode($response);
+  }
 
-            /**
-             * Check whether user name and password were inputed
-             */
-            if(!$data["userName"]) {
-                $errors[] = "Моля, въведете потребителско име.";
-            }
+  function dashboard() {
+    $response = [];
 
-            if(!$data["password"]) {
-                $errors[] = "Моля, въведете парола.";
-            }
+    if ($_SESSION) {
+      if ($_SESSION["userName"]) {
+        $response = ["success" => true, "data" => $_SESSION["userName"]];
+      } else {
+        $response = ["success" => false, "data" => "Неоторизиран достъп"];
+      }
+    } else {
+      if (isset($_COOKIE["token"])) {
+        $tokenUtility = new TokenUtility();
+        $isValid = $tokenUtility->checkToken($_COOKIE["token"]);
 
-            if(!$data["confirmPassword"]) {
-                $errors[] = "Моля, потвърдете паролата.";
-            }
+        if ($isValid["success"]) {
+          $_SESSION["userName"] = $isValid["user"]->getUsername();
+          $_SESSION["password"] = $isValid["user"]->getPassword();
 
-            /**
-             * If the user name and password were inputed we can validate them
-             */
-            if($data["userName"] && $data["password"] && $data["confirmPassword"]) {
-                if($data["confirmPassword"] !== $data["password"]) {
-                    $errors[] = "Двете пароли не съвпадат";
-                } else {
-                    $user = new User($data["userName"], $data["password"]);
-                    $exists = $user->userExists();
-
-                    if($exists["exists"]){
-                        $errors[] = "Потребителското име е заето";
-                    } else {
-                        $passwordHash = password_hash($data["password"], PASSWORD_DEFAULT);
-                        $user->createUser($passwordHash, $data["email"]);
-                    }
-                }
-            }
-
-            $response;
-
-            if($errors) {
-                $response = ["success" => false, "data" => $errors];
-            } else {
-                $response = ["success" => true];
-            }
-
-            /**
-             * Return response to the user
-             */
-            echo json_encode($response);
+          $response = ["success" => true, "data" => $_SESSION["userName"]];
         } else {
-            echo "Грешка...";
+          $response = ["success" => false, "data" => $isValid["error"]];
         }
+      } else {
+        $response = ["success" => false, "data" => "Вашата сесия е изтекла"];
+      }
     }
 
-    /**
-     * Get the data needed for the user's dashboard
-     */
-    function dashboard() {
-        $response = [];
-        /**
-         * Check whether a session was created.
-         * If there was no session, it might be expired.
-         */
-        if($_SESSION) {
-            /**
-             * Check whether some user is stored to the session.
-             * If there is no user stored to the session, the access is unathorized.
-             */
-            if($_SESSION["userName"]) {
-                $response = ["success" => true, "data" => $_SESSION["userName"]];
-            } else {
-                $response = ["success" => false, "data" => "Неоторизиран достъп."];
-            }
-        } else {
-            if(isset($_COOKIE['token'])) {
-                $tokenUtility = new TokenUtility();
-                $isValid = $tokenUtility->checkToken($_COOKIE['token']);
+    echo json_encode($response);
+  }
 
-                /**
-                 * If the inputed user name and password were valid, we can store the to the session
-                 */
-                if($isValid["success"]){
-                    $_SESSION["userName"] = $isValid["user"]->getUsername();
-                    $_SESSION["password"] = $isValid["user"]->getPassword();
+  function logout() {
+    if ($_SESSION) {
+      session_unset();
+      session_destroy();
 
-                    $response = ["success" => true, "data" => $_SESSION["userName"]];
-                } else {
-                    $response = ["success" => false, "data" => $isValid["error"]];
-                }
-            } else {
-                $response = ["success" => false, "data" => "Вашата сесия е изтекла."];
-            }
-        }
+      setcookie("token", "", time() - 60 * 30, "/");
 
-        /**
-         * Return response to the user.
-         */
-        echo json_encode($response);
+      echo json_encode(["success" => true]);
+    } else {
+      echo json_encode(["success" => false]);
     }
+  }
 
-    /**
-     * Handle user's logout, destroying the user's session
-     */
-    function logout() {
-        if($_SESSION){
-            session_unset();
-            session_destroy();
+  function testInput($input) {
+    $input = trim($input);
+    $input = htmlspecialchars($input);
+    $input = stripslashes($input);
 
-            setcookie("token", "", time() - 60 * 30, "/");
-
-            echo json_encode(["success" => true]);
-        } else {
-            echo json_encode(["success" => false]);
-        }
-    }
+    return $input;
+  }
 ?>
