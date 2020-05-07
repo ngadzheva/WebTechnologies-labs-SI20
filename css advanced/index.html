@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <!--
+            This meta tag gives the browser instructions on how to control the page's dimensions and scaling.
+            The viewport is the user's visible area of a web page.
+            The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen.
+            The width=device-width part sets the width of the page to follow the screen-width of the device.
+            The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+        -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Web Task</title>
+
+        <link rel="stylesheet" type="text/css" href="styles.css"/>
+    </head>
+
+    <body>
+        <header id="buttons">
+            <nav>
+                <button>Вход</button>
+                <button>Регистрация</button>
+            </nav>
+        </header>
+
+        <aside>
+            <nav>
+                <a href="#">Компютърна графика с WebGL</a>
+                <a id="go" href="#">Програмиране с Go</a>
+                <a href="#">Програмиране с Ruby</a>
+                <a href="#">Agile</a>
+            </nav>
+        </aside>
+
+        <main>
+            <section id="webgl">
+                <header>
+                    <h1>Компютърна графика с WebGL</h1>
+                </header>
+
+                <h3>доц. П. Бойчев</h3>
+
+                <p>
+                    След завършване на курса студентите ще могат да създават тримерни статични изображения и тримерни анимации.
+                </p>
+
+                <p>
+                    <mark>Тип: </mark>
+                    задължителен иззбираем
+                </p>
+
+                <p>
+                    <mark>Курс: </mark>
+                    1<mark id="sup">ви</mark>
+                </p>
+
+                <p>
+                    <mark>Програма: </mark>
+                    бакалавър
+                </p>
+
+                <form>
+                    <textarea placeholder="Добавяне на коментар"></textarea>
+                    <input type="submit" name="submit" value="Отказ"/>
+                    <input type="submit" name="submit" value="Публикуване"/>
+                </form>
+            </section>
+
+            <section id="comments">
+                <header>
+                    <h3>Коментари</h3>
+                </header>
+
+                <article>
+                    <header>
+                        <p class="name">
+                            Вили Велева
+                            <time>24.10.2019</time>
+                        </p>
+                    </header>
+
+                    <blockquote>
+                            "Препоръчвам записването на курса. Интересни неща се учат, има и освобождаване с реферати."
+                    </blockquote>
+                </article>
+
+                <article>
+                    <header>
+                        <p class="name">
+                            Вили Велева
+                            <time>24.10.2019</time>
+                        </p>
+                    </header>
+
+                    <blockquote>
+                            "Препоръчвам записването на курса. Интересни неща се учат, има и освобождаване с реферати."
+                    </blockquote>
+                </article>
+
+                <article>
+                    <header>
+                        <p class="name">
+                            Вили Велева
+                            <time>24.10.2019</time>
+                        </p>
+                    </header>
+
+                    <blockquote>
+                            "Препоръчвам записването на курса. Интересни неща се учат, има и освобождаване с реферати."
+                    </blockquote>
+                </article>
+            </section>
+        </main>
+    </body>
+</html>
