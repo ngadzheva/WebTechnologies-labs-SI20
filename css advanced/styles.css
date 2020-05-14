@@ -5,6 +5,8 @@ body {
   grid-template-columns: 25% 75%;
   grid-column-gap: 20px;
   margin: 15px 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -17,15 +19,46 @@ body {
 #buttons {
   grid-area: header;
   justify-self: end;
+  margin-bottom: 15px;
+  ;
+}
+
+button {
+  background: #97bf0e;
+  color: white;
+  border-radius: 15px;
+  padding: 10px 15px;
+  border-width: 0;
+  cursor: pointer;
 }
 
 aside {
   grid-area: sidebar;
+  margin-bottom: 15px;
+  margin-top: 30px;
 }
 
 aside nav {
   display: flex;
   flex-direction: column-reverse;
+}
+
+a {
+  color: #c3b8b0;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px 10px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 16px;
+}
+
+a:visited {
+  color: #c3b8b0;
+}
+
+a:hover {
+  color: white;
+  background: #97bf0e;
 }
 
 #go {
@@ -34,4 +67,80 @@ aside nav {
 
 main {
   grid-area: main;
+  width: 97%;
+}
+
+#webgl header {
+  color: #97bf0e;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+p, blockquote {
+  text-align: justify;
+  margin-bottom: 15px;
+}
+
+mark {
+  background: white;
+}
+
+mark:not(#sup) {
+  font-style: italic;
+}
+
+#sup {
+  vertical-align: super;
+}
+
+textarea {
+  width: 99%;
+  height: 60px;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+input {
+  background: white;
+  color: #97bf0e;
+  border: 1px solid #97bf0e;
+  border-radius: 15px;
+  padding: 10px 15px;
+  margin: 10px 0;
+}
+
+input:hover {
+  background: #97bf0e;
+  color: white;
+  cursor: pointer;
+}
+
+#comments {
+  margin-top: 10px;
+}
+
+article {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.name {
+  color: #a8cbf2;
+  font-size: 20px;
+}
+
+time {
+  color: black;
+  font-style: italic;
+  font-size: 18px;
 }
